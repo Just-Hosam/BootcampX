@@ -13,9 +13,9 @@ FROM students
 JOIN cohorts ON cohorts.id = cohort_id
 JOIN assistance_requests ON students.id = student_id
 JOIN teachers ON teachers.id = teacher_id
-WHERE cohorts.name = '${process.argv[2]}'
+WHERE cohorts.name = $1
 ORDER BY teachers.name;
-`)
+`, [process.argv[2]])
 .then(res => {
   console.log('connected');
   res.rows.forEach(user => {
